@@ -7,6 +7,7 @@ type HotelType = {
   _id: string;
   createrId: string;
   name: string;
+  landmark: string;
   city: string;
   state: string;
   country: string;
@@ -93,6 +94,17 @@ export const addHotel = async (hotelFormData: FormData) => {
 
 export const fetchHotels = async (): Promise<HotelType[]> => {
   const response = await fetch(`${API_BASE_URL}/api/hotel/`, {
+    method: "GET",
+    credentials: "include",
+  });
+  if (!response.ok) {
+    throw new Error("Token invalid");
+  }
+  return response.json();
+};
+
+export const fetchHotelById = async (hotelId: string): Promise<HotelType> => {
+  const response = await fetch(`${API_BASE_URL}/api/hotel/${hotelId}`, {
     method: "GET",
     credentials: "include",
   });

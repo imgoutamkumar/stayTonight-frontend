@@ -84,6 +84,7 @@ export const ManageHotelForm = ({ onSave, isLoading }: Props) => {
           </button> */}
 
           <LoadingButton
+          sx={{ width: '100px', height: '40px' }}
             color="primary"
             disabled={isLoading}
             loading={isLoading}

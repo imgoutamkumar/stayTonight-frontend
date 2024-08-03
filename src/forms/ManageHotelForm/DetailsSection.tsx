@@ -13,7 +13,7 @@ export const DetailsSection = () => {
       <label className=" text-gray-700 text-sm font-bold">
         Name
         <input
-          className=" rounded w-full py-1 px-2 font-normal h-10 border-2 border-gray-400"
+          className=" rounded w-full py-1 px-2 font-normal h-12 border-2 border-gray-400"
           type="text"
           placeholder="enter name"
           {...register("name", { required: "This field is required" })}
@@ -24,7 +24,7 @@ export const DetailsSection = () => {
       </label>
 
       <div className="flex justify-between gap-4">
-      <label className=" text-gray-700 text-sm font-bold">
+      <label className="w-full text-gray-700 text-sm font-bold">
           Landmark
           <input
             className=" rounded w-full py-1 px-2 font-normal h-10 border-2 border-gray-400"
@@ -36,7 +36,7 @@ export const DetailsSection = () => {
             <span className="text-red-500">{errors.landmark.message}</span>
           )}
         </label>
-        <label className=" text-gray-700 text-sm font-bold">
+        <label className="w-full text-gray-700 text-sm font-bold">
           City
           <input
             className=" rounded w-full py-1 px-2 font-normal h-10 border-2 border-gray-400"
@@ -48,7 +48,7 @@ export const DetailsSection = () => {
             <span className="text-red-500">{errors.city.message}</span>
           )}
         </label>
-        <label className=" text-gray-700 text-sm font-bold">
+        <label className="w-full text-gray-700 text-sm font-bold">
           State
           <input
             className=" rounded w-full py-1 px-2 font-normal h-10 border-2 border-gray-400"
@@ -60,7 +60,7 @@ export const DetailsSection = () => {
             <span className="text-red-500">{errors.state.message}</span>
           )}
         </label>
-        <label className=" text-gray-700 text-sm font-bold">
+        <label className="w-full text-gray-700 text-sm font-bold">
           Country
           <input
             className=" rounded w-full py-1 px-2 font-normal h-10 border-2 border-gray-400"
