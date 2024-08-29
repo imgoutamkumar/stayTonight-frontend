@@ -1,6 +1,7 @@
 import { useMutation, useQueryClient } from "react-query";
 import * as apiClient from "../api-client";
 import { useAppContext } from "../contexts/AppContext";
+import { Button } from "@mui/material";
 
 export const SignOutButton = () => {
     const queryClient= useQueryClient();
@@ -19,11 +20,6 @@ export const SignOutButton = () => {
   };
 
   return (
-    <button
-      onClick={handleClick}
-      className=" text-blue-600 px-3 font-bold bg-white hover:bg-black hover:border-white hover:border-2"
-    >
-      Sign Out
-    </button>
+    <Button onClick={handleClick} color="error" variant="outlined">Sign Out </Button>
   );
 };

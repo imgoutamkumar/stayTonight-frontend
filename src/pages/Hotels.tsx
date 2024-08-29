@@ -4,6 +4,7 @@ import * as apiClient from "../api-client";
 import { useAppContext } from "../contexts/AppContext";
 import { BsBuilding, BsMap } from "react-icons/bs";
 import { BiHotel, BiMoney, BiStar } from "react-icons/bi";
+
 export const Hotels = () => {
   const { showToast } = useAppContext();
   const { data: hotelsData } = useQuery("fetchHotels", apiClient.fetchHotels, {
@@ -32,7 +33,7 @@ export const Hotels = () => {
       </span>
       <div className="grid grid-cols-1 gap-8">
         {hotelsData.map((hotel,index) => (
-          <div key={index} className="flex flex-col justify-between border border-slate-300 rounded-lg p-8 gap-5">
+          <div key={index} className="flex flex-col justify-between border border-slate-300 hover:border-black rounded-lg p-8 gap-5">
             <h2 className="text-2xl text-bold">{hotel.name}</h2>
             <div className="truncate whitespace-pre-line h-[150px]">{hotel.description}</div>
           <div className="grid grid-cols-5 gap-2">
@@ -58,7 +59,7 @@ export const Hotels = () => {
             </div>
           </div>
           <span className="flex justify-end ">
-            <Link to={`/edit-hotel/${hotel._id}`} className="rounded-md w-[120px] flex  justify-center items-center bg-blue-600 text-white font-bold p-2 hover:bg-blue-500">
+            <Link to={`/editHotel/${hotel._id}`} className="rounded-md w-[120px] flex  justify-center items-center bg-blue-600 text-white font-bold p-2 hover:bg-blue-500">
             View Details</Link>
           </span>
           </div>

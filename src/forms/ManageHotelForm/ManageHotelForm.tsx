@@ -6,6 +6,8 @@ import { GuestSection } from "./GuestSection";
 import { ImagesSection } from "./ImagesSection";
 import { TypesSection } from "./TypesSection";
 import LoadingButton from "@mui/lab/LoadingButton";
+import { HotelType } from "../../shared/types";
+import { useEffect } from "react";
 
 export type HotelFormData = {
   name: string;
@@ -25,18 +27,25 @@ export type HotelFormData = {
 };
 
 type Props = {
+  hotelData?: HotelType;
   onSave: (hotelFormData: FormData) => void;
   isLoading: boolean;
 };
 
-export const ManageHotelForm = ({ onSave, isLoading }: Props) => {
+export const ManageHotelForm = ({ onSave, isLoading, hotelData }: Props) => {
   const formMethods = useForm<HotelFormData>();
-  const { handleSubmit } = formMethods;
+  const { handleSubmit, reset } = formMethods;
+
+  useEffect(() => {
+    reset(hotelData);
+  }, [hotelData, reset]);
 
   const onSubmitHotelForm = handleSubmit((data: HotelFormData) => {
     console.log(data);
     const formData = new FormData();
-
+if (hotelData) {
+  formData.append("hotelId",hotelData._id)
+}
     formData.append("name", data.name);
     formData.append("landmark", data.landmark);
     formData.append("city", data.city);
@@ -51,9 +60,12 @@ export const ManageHotelForm = ({ onSave, isLoading }: Props) => {
     data.facilities.forEach((facility, index) => {
       formData.append(`facilities[${index}]`, facility);
     });
-    /*  Array.from(data.imageUrls).forEach((imageUrl) => {
-      formData.append(`imageUrls`, imageUrl);
-    }); */
+    if (data.imageUrls) {
+      data.imageUrls.forEach((imageUrl,index) => {
+        formData.append(`imageUrls[${index}]`, imageUrl);
+      });
+    }
+    
 
     Array.from(data.imageFiles).forEach((imageFile) => {
       formData.append(`imageFiles`, imageFile);
@@ -84,7 +96,7 @@ export const ManageHotelForm = ({ onSave, isLoading }: Props) => {
           </button> */}
 
           <LoadingButton
-          sx={{ width: '100px', height: '40px' }}
+            sx={{ width: "100px", height: "40px" }}
             color="primary"
             disabled={isLoading}
             loading={isLoading}

@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import { useMutation, useQueryClient } from "react-query";
 import * as apiClient from "../api-client";
 import { useAppContext } from "../contexts/AppContext";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export type RegisterFormData = {
   firstName: string;
@@ -41,7 +41,8 @@ const Register = () => {
   });
 
   return (
-    <form className="flex flex-col gap-5" onSubmit={onSubmit}>
+    <div className="w-full min-h-screen flex justify-center my-auto">
+       <form className="flex flex-col gap-4 px-3 w-[350px] md:w-[450px] justify-center" onSubmit={onSubmit}>
       <h2 className="text-3xl font-bold">Create an Acoount</h2>
       <div className="flex flex-col md:flex-row gap-5">
         <label className=" text-gray-700 text-sm font-bold flex-1">
@@ -119,7 +120,8 @@ const Register = () => {
           <span className="text-red-500">{errors.confirmPassword.message}</span>
         )}
       </label>
-      <span>
+      <span className="flex">
+      <span className="flex flex-1">already have an account?<Link to="/signIn"><span className="text-blue-500 hover:text-blue-700">Login</span> </Link> </span>
         <button
           type="submit"
           className="bg-black border-2 text-white p-2 font-bold hover:bg-white hover:text-black"
@@ -128,6 +130,8 @@ const Register = () => {
         </button>
       </span>
     </form>
+    </div>
+   
   );
 };
 

@@ -26,6 +26,7 @@ const SignIn = () => {
     const mutation = useMutation(apiClient.signIn, {
       onSuccess: async() => {
         showToast({message:"Login success!",type:"SUCCESS"})
+        //refetch the post data after mutation successful if there is add any new data
         await queryClient.invalidateQueries("")
         navigate("/");
       },
@@ -40,8 +41,9 @@ const SignIn = () => {
     });
 
     return (
-      <form className="flex flex-col gap-5" onSubmit={onSubmit}>
-        <h2 className="text-3xl font-bold">Sign In</h2>
+      <div className="w-full min-h-screen flex justify-center my-auto">
+        <form className="flex flex-col gap-4 px-3 w-[350px] md:w-[450px] justify-center" onSubmit={onSubmit}>
+        <h2 className="text-3xl font-bold my-[10px]">Sign In</h2>
        
         <label className=" text-gray-700 text-sm font-bold">
           Email
@@ -73,8 +75,8 @@ const SignIn = () => {
             <span className="text-red-500">{errors.password.message}</span>
           )}
         </label>
-        <span>
-          <span>Not registered? <Link to="/">Create account</Link> </span>
+        <span className="flex">
+          <span className="flex flex-1">don't have an account?<Link to="/register"><span className="text-blue-500 hover:text-blue-700">Create Account</span></Link> </span>
           <button
             type="submit"
             className="bg-black border-2 text-white p-2 font-bold hover:bg-white hover:text-black"
@@ -83,6 +85,8 @@ const SignIn = () => {
           </button>
         </span>
       </form>
+      </div>
+      
     );
   };
   
