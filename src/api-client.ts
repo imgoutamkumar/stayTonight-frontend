@@ -139,12 +139,17 @@ export type SerachParams = {
   adultCount?: string;
   childCount?: string;
   page?: string;
+  facilities?: string[];
+  types?: string[];
+  stars?: string[];
+  maxPrice?: string;
+  sortOptions?: string;
 };
 
 export const searchHotels = async (
   searchParams: SerachParams
 ): Promise<HotelSearchResponse> => {
-  console.log(searchParams);
+  //console.log(searchParams);
   const queryParams = new URLSearchParams();
   queryParams.append("destination", searchParams.destination || "");
   queryParams.append("checkIn", searchParams.checkIn || "");
@@ -152,13 +157,20 @@ export const searchHotels = async (
   queryParams.append("adultCount", searchParams.adultCount || "");
   queryParams.append("childCount", searchParams.childCount || "");
   queryParams.append("page", searchParams.page || "");
+  queryParams.append("maxPrice", searchParams.maxPrice || "");
+  queryParams.append("sortOptions", searchParams.sortOptions || "");
+  searchParams.facilities?.forEach((facility) =>
+    queryParams.append("facilities", facility)
+  );
+  searchParams.types?.forEach((type) => queryParams.append("types", type));
+  searchParams.stars?.forEach((star) => queryParams.append("stars", star));
 
   const response = await fetch(
-    `${API_BASE_URL}/api/hotel/search?${queryParams}`
-    /* {
+    `${API_BASE_URL}/api/hotel/search?${queryParams}`,
+    {
       method: "GET",
       credentials: "include",
-    } */
+    }
   );
 
   if (!response.ok) {
